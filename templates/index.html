@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZIP File Explorer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <main class="container">
+    <h1>ZIP File Explorer</h1>
+    <p class="subtitle">Upload a ZIP file to view all files inside it.</p>
+
+    <form method="post" enctype="multipart/form-data" class="upload-form">
+      <input type="file" name="zip_file" accept=".zip,application/zip" required />
+      <button type="submit">Upload and List Files</button>
+    </form>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if file_names %}
+      <section>
+        <h2>Files in ZIP</h2>
+        <ul>
+          {% for file_name in file_names %}
+            <li>{{ file_name }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+  </main>
+</body>
+</html>
